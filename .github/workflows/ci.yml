@@ -52,7 +52,7 @@ jobs:
         run: npx prisma migrate deploy
 
       - name: Run backend tests
-        run: npm test
+        run: npx tsx --test --test-concurrency=1 $(find tests -type f -name "*.test.ts" | sort)
 
       - name: Run backend build
         run: npm run build
