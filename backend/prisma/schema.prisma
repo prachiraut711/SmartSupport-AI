@@ -1,0 +1,119 @@
+// Prisma schema file for SmartSupport AI
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  AGENT
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  WAITING_FOR_CUSTOMER
+  RESOLVED
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TicketCategory {
+  BILLING
+  TECHNICAL
+  ACCOUNT
+  SUBSCRIPTION
+  REFUND
+  OTHER
+}
+
+enum Sentiment {
+  POSITIVE
+  NEUTRAL
+  NEGATIVE
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdTickets  Ticket[]  @relation("CustomerTickets")
+  assignedTickets Ticket[]  @relation("AgentTickets")
+  messages        Message[] @relation("UserMessages")
+
+  @@map("users")
+}
+
+model Ticket {
+  id          String         @id @default(uuid())
+  title       String
+  description String         @db.Text
+  status      TicketStatus   @default(OPEN)
+  priority    TicketPriority @default(MEDIUM)
+  category    TicketCategory @default(OTHER)
+  customerId  String
+  agentId     String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  customer   User        @relation("CustomerTickets", fields: [customerId], references: [id], onDelete: Cascade)
+  agent      User?       @relation("AgentTickets", fields: [agentId], references: [id], onDelete: SetNull)
+  messages   Message[]
+  aiAnalysis AIAnalysis?
+
+  @@index([status])
+  @@index([priority])
+  @@index([category])
+  @@index([customerId])
+  @@index([agentId])
+  @@index([createdAt])
+  @@map("tickets")
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  content    String   @db.Text
+  ticketId   String
+  senderId   String
+  isInternal Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  sender User   @relation("UserMessages", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([ticketId])
+  @@index([senderId])
+  @@map("messages")
+}
+
+model AIAnalysis {
+  id             String         @id @default(uuid())
+  ticketId       String         @unique
+  category       TicketCategory
+  priority       TicketPriority
+  sentiment      Sentiment
+  summary        String         @db.Text
+  suggestedReply String         @db.Text
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  @@map("ai_analyses")
+}

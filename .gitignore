@@ -1,0 +1,68 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!.env.example
+
+# Production Build Outputs
+dist/
+dist-ssr/
+build/
+out/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Coverage and Testing
+coverage/
+.nyc_output/
+
+# Prisma
+# Note: Keep schema.prisma and migrations/ tracked. Ignore generated client if generated outside node_modules
+src/generated/
+prisma/generated/
+
+# SQLite / Local Test Databases (if used for testing)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor & IDE Files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Docker local overrides
+docker-compose.override.yml
+
+# Temporary and Cache Directories
+.cache/
+tmp/
+temp/
