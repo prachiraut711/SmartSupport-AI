@@ -2,6 +2,8 @@
 
 SmartSupport AI is an AI-assisted customer support and ticket management platform built with React, Node.js, PostgreSQL, and Google Gemini AI. It allows customers to submit and track support requests while providing agents with an intelligent workspace to triage, assign, and resolve tickets with automated AI insights.
 
+**🌐 Live Demo:** https://smart-support-ai-two.vercel.app/
+
 ---
 
 ## ✨ Features
@@ -14,6 +16,17 @@ SmartSupport AI is an AI-assisted customer support and ticket management platfor
 * **Gemini AI ticket analysis** for triage and sentiment detection
 * **Automated insights**: sentiment, category, priority, summary, and suggested replies
 * **Responsive UI** built with Tailwind CSS and shadcn/ui
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend**: React, TypeScript, Vite, Tailwind CSS, shadcn/ui
+* **Backend**: Node.js, Express.js, TypeScript, REST API, JWT
+* **Database**: PostgreSQL, Prisma
+* **AI**: Google Gemini API
+* **DevOps**: Docker, Docker Compose, GitHub Actions
+* **Deployment**: Vercel, Render, Neon PostgreSQL
 
 ---
 
@@ -36,16 +49,6 @@ SmartSupport AI is an AI-assisted customer support and ticket management platfor
 | Agent Support Queue | Gemini AI Ticket Analysis |
 | :---: | :---: |
 | ![Agent Support Queue](docs/screenshots/agent-dashboard.png) | ![AI Analysis](docs/screenshots/ai-analysis.png) |
-
----
-
-## 🛠️ Tech Stack
-
-* **Frontend**: React, TypeScript, Vite, Tailwind CSS, shadcn/ui
-* **Backend**: Node.js, Express.js, TypeScript, REST API, JWT
-* **Database**: PostgreSQL, Prisma
-* **AI**: Google Gemini API
-* **DevOps**: Docker, Docker Compose, GitHub Actions
 
 ---
 
@@ -103,4 +106,3 @@ docker compose up --build
 **Prachi Raut**
 
 GitHub: https://github.com/prachiraut711/SmartSupport-AI
-
