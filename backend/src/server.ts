@@ -13,7 +13,7 @@ import { errorHandler } from "./middleware/error.middleware"
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = Number(process.env.PORT) || 5000
 
 // Middleware
 app.use(cors())
@@ -45,8 +45,8 @@ if (
   typeof require !== "undefined" &&
   require.main === module
 ) {
-  app.listen(PORT, () => {
-    console.log(`SmartSupport AI API running on port ${PORT}`)
+  app.listen(PORT, "0.0.0.0", () => {
+  console.log(`SmartSupport AI API running on port ${PORT}`)
   })
 }
 
